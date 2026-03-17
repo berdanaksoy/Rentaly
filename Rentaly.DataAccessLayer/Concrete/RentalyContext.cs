@@ -10,7 +10,7 @@ namespace Rentaly.DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("(localdb)\\MSSQLLocalDB;Initial Catalog=RentalyDb;Integrated Security=True");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Initial Catalog=RentalyDb;Integrated Security=True");
         }
 
         public DbSet<Branch> Branches { get; set; }

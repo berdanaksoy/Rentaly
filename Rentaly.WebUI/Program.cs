@@ -1,6 +1,16 @@
+using Rentaly.BusinessLayer.Abstract;
+using Rentaly.BusinessLayer.Concrete;
+using Rentaly.DataAccessLayer.Abstract;
+using Rentaly.DataAccessLayer.Concrete;
+using Rentaly.DataAccessLayer.EntityFramework;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<ICategoryDal, EFCategoryDal>();
+builder.Services.AddScoped<ICategoryService, CategoryManager>();
+builder.Services.AddDbContext<RentalyContext>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -25,5 +35,12 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+});
 
 app.Run();
