@@ -36,6 +36,7 @@ namespace Rentaly.DataAccessLayer.RepositoryDesignPattern
         public async Task InsertAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(T entity)

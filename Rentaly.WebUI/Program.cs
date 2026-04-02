@@ -9,6 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<ICategoryDal, EFCategoryDal>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
+
+builder.Services.AddScoped<ICarService, CarManager>();
+builder.Services.AddScoped<ICarDal, EFCarDal>();
+
+builder.Services.AddScoped<IBranchService, BranchManager>();
+builder.Services.AddScoped<IBranchDal, EFBranchDal>();
+
 builder.Services.AddDbContext<RentalyContext>();
 
 builder.Services.AddControllersWithViews();
