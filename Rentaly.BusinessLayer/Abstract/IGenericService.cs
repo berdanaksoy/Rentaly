@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Rentaly.BusinessLayer.Abstract
+﻿namespace Rentaly.BusinessLayer.Abstract
 {
     public interface IGenericService<T> where T : class
     {
@@ -10,6 +6,6 @@ namespace Rentaly.BusinessLayer.Abstract
         Task TDeleteAsync(int id);
         Task TUpdateAsync(T entity);
         Task<List<T>> TGetListAsync();
-        Task<T> TGetByIdAsync(int id);
+        Task<T?> TGetByIdAsync(int id);
     }
 }

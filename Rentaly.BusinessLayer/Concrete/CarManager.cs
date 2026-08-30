@@ -1,24 +1,25 @@
 ﻿using Rentaly.BusinessLayer.Abstract;
 using Rentaly.DataAccessLayer.Abstract;
+using Rentaly.DataAccessLayer.UnitOfWorkDesignPattern;
 using Rentaly.EntityLayer.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Rentaly.BusinessLayer.Concrete
 {
     public class CarManager : ICarService
     {
         private readonly ICarDal _carDal;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CarManager(ICarDal carDal)
+        public CarManager(ICarDal carDal, IUnitOfWork unitOfWork)
         {
             _carDal = carDal;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task TDeleteAsync(int id)
         {
             await _carDal.DeleteAsync(id);
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task<List<Car>> TGetAllCarsWithCategoryAsync()
@@ -26,7 +27,7 @@ namespace Rentaly.BusinessLayer.Concrete
             return await _carDal.GetAllCarsWithCategoryAsync();
         }
 
-        public async Task<Car> TGetByIdAsync(int id)
+        public async Task<Car?> TGetByIdAsync(int id)
         {
             return await _carDal.GetByIdAsync(id);
         }
@@ -39,11 +40,13 @@ namespace Rentaly.BusinessLayer.Concrete
         public async Task TInsertAsync(Car entity)
         {
             await _carDal.InsertAsync(entity);
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task TUpdateAsync(Car entity)
         {
             await _carDal.UpdateAsync(entity);
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

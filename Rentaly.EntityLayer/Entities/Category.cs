@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Rentaly.EntityLayer.Entities
+﻿namespace Rentaly.EntityLayer.Entities
 {
     public class Category
     {
         public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
-        public List<Car> Cars { get; set; }
+        public string CategoryName { get; set; } = null!;
+
+        public ICollection<Car> Cars { get; set; } = new List<Car>();
     }
 }

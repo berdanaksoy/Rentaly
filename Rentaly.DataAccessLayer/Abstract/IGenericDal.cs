@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Linq.Expressions;
 
 namespace Rentaly.DataAccessLayer.Abstract
 {
-    public interface IGenericDal<T>
+    public interface IGenericDal<T> where T : class
     {
         Task InsertAsync(T entity);
         Task DeleteAsync(int id);
         Task UpdateAsync(T entity);
         Task<List<T>> GetListAsync();
-        Task<T> GetByIdAsync(int id);
+        Task<List<T>> GetListByFilterAsync(Expression<Func<T, bool>> filter);
+        Task<T?> GetByIdAsync(int id);
     }
 }

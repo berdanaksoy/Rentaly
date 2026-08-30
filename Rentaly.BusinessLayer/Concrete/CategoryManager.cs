@@ -1,27 +1,28 @@
 ﻿using Rentaly.BusinessLayer.Abstract;
 using Rentaly.DataAccessLayer.Abstract;
+using Rentaly.DataAccessLayer.UnitOfWorkDesignPattern;
 using Rentaly.EntityLayer.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Rentaly.BusinessLayer.Concrete
 {
     public class CategoryManager : ICategoryService
     {
         private readonly ICategoryDal _categoryDal;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CategoryManager(ICategoryDal categoryDal)
+        public CategoryManager(ICategoryDal categoryDal, IUnitOfWork unitOfWork)
         {
             _categoryDal = categoryDal;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task TDeleteAsync(int id)
         {
             await _categoryDal.DeleteAsync(id);
+            await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task<Category> TGetByIdAsync(int id)
+        public async Task<Category?> TGetByIdAsync(int id)
         {
             return await _categoryDal.GetByIdAsync(id);
         }
@@ -34,11 +35,13 @@ namespace Rentaly.BusinessLayer.Concrete
         public async Task TInsertAsync(Category entity)
         {
             await _categoryDal.InsertAsync(entity);
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task TUpdateAsync(Category entity)
         {
             await _categoryDal.UpdateAsync(entity);
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

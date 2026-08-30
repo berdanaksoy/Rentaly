@@ -13,7 +13,7 @@ namespace Rentaly.BusinessLayer.Concrete
             throw new NotImplementedException();
         }
 
-        public Task<Rental> TGetByIdAsync(int id)
+        public Task<Rental?> TGetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }

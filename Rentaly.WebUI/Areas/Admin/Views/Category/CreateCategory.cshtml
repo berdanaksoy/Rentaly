@@ -485,7 +485,7 @@
 // Mevcut kategori isimleri (benzerlik kontrolü için)
 // Controller'dan ViewBag.ExistingNames ile beslenebilir
 const existingNames = @Html.Raw(
-    Newtonsoft.Json.JsonConvert.SerializeObject(
+    //Newtonsoft.Json.JsonConvert.SerializeObject(
         ViewBag.ExistingNames ?? new string[] {}
     )
 );

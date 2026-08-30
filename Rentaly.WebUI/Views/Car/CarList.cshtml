@@ -563,7 +563,7 @@
                 <i class="fa-solid fa-circle-check"></i>
             </div>
             <div>
-                <div class="mini-stat-val" style="color:#059669;">@Model.Count(c => c.IsAvailable)</div>
+                @* <div class="mini-stat-val" style="color:#059669;">@Model.Count(c => c.IsAvailable)</div> *@
                 <div class="mini-stat-label">Müsait</div>
             </div>
         </div>
@@ -574,7 +574,7 @@
                 <i class="fa-solid fa-circle-xmark"></i>
             </div>
             <div>
-                <div class="mini-stat-val" style="color:var(--danger);">@Model.Count(c => !c.IsAvailable)</div>
+                @* <div class="mini-stat-val" style="color:var(--danger);">@Model.Count(c => !c.IsAvailable)</div> *@
                 <div class="mini-stat-label">Müsait Değil</div>
             </div>
         </div>
@@ -643,28 +643,13 @@
 <div class="cars-grid" id="carsGrid">
     @foreach (var car in Model)
     {
-        var fuelClass = car.FuelType?.ToLower() switch {
-            "benzin"   => "fuel-benzin",
-            "dizel"    => "fuel-dizel",
-            "elektrik" => "fuel-elektrik",
-            "hibrit"   => "fuel-hibrit",
-            "lpg"      => "fuel-lpg",
-            _          => "fuel-default"
-        };
-        var fuelIcon = car.FuelType?.ToLower() switch {
-            "benzin"   => "fa-gas-pump",
-            "dizel"    => "fa-gas-pump",
-            "elektrik" => "fa-bolt",
-            "hibrit"   => "fa-leaf",
-            "lpg"      => "fa-fire-flame-simple",
-            _          => "fa-gas-pump"
-        };
+        
 
         <div class="car-card"
              data-id="@car.CarId"
              data-plate="@car.PlateNumber?.ToLower()"
              data-fuel="@car.FuelType"
-             data-available="@car.IsAvailable.ToString().ToLower()"
+            
              data-price="@car.DailyPrice"
              data-year="@car.Year"
              data-km="@car.Kilometer">
@@ -682,9 +667,8 @@
                     </div>
                 }
 
-                <span class="car-badge-available @(car.IsAvailable ? "badge-available" : "badge-unavailable")">
-                    <i class="fa-solid @(car.IsAvailable ? "fa-circle-check" : "fa-circle-xmark")"></i>
-                    @(car.IsAvailable ? "Müsait" : "Müsait Değil")
+                <span class="car-badge-available @("badge-unavailable")">
+                    <i class="fa-solid @("fa-circle-check" )"></i>
                 </span>
                 <span class="car-badge-year">@car.Year</span>
             </div>
@@ -707,9 +691,7 @@
                     <span class="car-spec-chip">
                         <i class="fa-solid fa-suitcase-rolling"></i> @car.LuggageCount Bavul
                     </span>
-                    <span class="car-spec-chip @fuelClass" style="border:none;">
-                        <i class="fa-solid @fuelIcon"></i> @car.FuelType
-                    </span>
+                    
                 </div>
 
                 <!-- Fiyat + KM -->
@@ -746,28 +728,12 @@
 <div class="cars-list" id="carsList" style="display:none;">
     @foreach (var car in Model)
     {
-        var fuelClass = car.FuelType?.ToLower() switch {
-            "benzin"   => "fuel-benzin",
-            "dizel"    => "fuel-dizel",
-            "elektrik" => "fuel-elektrik",
-            "hibrit"   => "fuel-hibrit",
-            "lpg"      => "fuel-lpg",
-            _          => "fuel-default"
-        };
-        var fuelIcon = car.FuelType?.ToLower() switch {
-            "benzin"   => "fa-gas-pump",
-            "dizel"    => "fa-gas-pump",
-            "elektrik" => "fa-bolt",
-            "hibrit"   => "fa-leaf",
-            "lpg"      => "fa-fire-flame-simple",
-            _          => "fa-gas-pump"
-        };
-
+        
         <div class="car-list-item"
              data-id="@car.CarId"
              data-plate="@car.PlateNumber?.ToLower()"
              data-fuel="@car.FuelType"
-             data-available="@car.IsAvailable.ToString().ToLower()"
+             
              data-price="@car.DailyPrice"
              data-year="@car.Year"
              data-km="@car.Kilometer">
@@ -792,13 +758,7 @@
                     <span>·</span>
                     <span>@car.Kilometer.ToString("N0") km</span>
                     <span>·</span>
-                    <span class="fuel-badge @fuelClass" style="padding:1px 7px;font-size:11px;">
-                        <i class="fa-solid @fuelIcon"></i> @car.FuelType
-                    </span>
-                    <span>·</span>
-                    <span style="color:@(car.IsAvailable ? "#059669" : "var(--danger)");font-weight:600;font-size:12px;">
-                        @(car.IsAvailable ? "Müsait" : "Müsait Değil")
-                    </span>
+                    
                 </div>
             </div>
 

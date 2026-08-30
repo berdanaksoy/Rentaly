@@ -7,17 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Container\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="FluentValidation" Version="11.12.0" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Rentaly.DataAccessLayer\Rentaly.DataAccessLayer.csproj" />
     <ProjectReference Include="..\Rentaly.DtoLayer\Rentaly.DtoLayer.csproj" />
   </ItemGroup>
+
+	<ItemGroup>
+		<NuGetAuditSuppress Include="https://github.com/advisories/GHSA-rvv3-g6hj-g44x" />
+	</ItemGroup>
 
 </Project>

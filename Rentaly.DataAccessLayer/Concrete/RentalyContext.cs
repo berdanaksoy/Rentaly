@@ -1,16 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Rentaly.EntityLayer.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Rentaly.DataAccessLayer.Concrete
 {
     public class RentalyContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public RentalyContext(DbContextOptions<RentalyContext> options) : base(options)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Initial Catalog=RentalyDb;Integrated Security=True");
         }
 
         public DbSet<Branch> Branches { get; set; }
@@ -20,5 +16,18 @@ namespace Rentaly.DataAccessLayer.Concrete
         public DbSet<Category> Categories { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Rental> Rentals { get; set; }
+
+        public DbSet<Process> Processes { get; set; }
+        public DbSet<OurFuture> OurFutures { get; set; }
+        public DbSet<About> Abouts { get; set; }
+        public DbSet<Award> Awards { get; set; }
+        public DbSet<Testimonial> Testimonials { get; set; }
+        public DbSet<Faq> Faqs { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(RentalyContext).Assembly);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

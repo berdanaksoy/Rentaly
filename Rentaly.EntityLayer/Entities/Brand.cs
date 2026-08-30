@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Rentaly.EntityLayer.Entities
+﻿namespace Rentaly.EntityLayer.Entities
 {
     public class Brand
     {
         public int BrandId { get; set; }
-        public string BrandName { get; set; }
-        public string ImageUrl { get; set; }
+        public string BrandName { get; set; } = null!;
+        public string ImageUrl { get; set; } = null!;
+
+        public ICollection<CarModel> CarModels { get; set; } = new List<CarModel>();
     }
 }

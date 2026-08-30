@@ -663,34 +663,22 @@
 
                         <!-- Marka -->
                         <div class="form-field">
-                            <label asp-for="BrandId" class="form-label">
-                                <i class="fa-solid fa-copyright" style="color:var(--primary);"></i>
-                                Marka <span class="req">*</span>
-                            </label>
-                            <select asp-for="BrandId"
-                                    asp-items="ViewBag.Brands"
-                                    class="form-control-custom"
-                                    onchange="updatePreview()">
-                                <option value="">— Marka Seçin —</option>
-                            </select>
-                            <span asp-validation-for="BrandId" class="field-error">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                            </span>
+                            
                         </div>
 
                         <!-- Model -->
                         <div class="form-field">
-                            <label asp-for="ModelId" class="form-label">
+                            <label asp-for="CarModelId" class="form-label">
                                 <i class="fa-solid fa-car" style="color:var(--primary);"></i>
                                 Model <span class="req">*</span>
                             </label>
-                            <select asp-for="ModelId"
+                            <select asp-for="CarModelId"
                                     asp-items="ViewBag.Models"
                                     class="form-control-custom"
                                     onchange="updatePreview()">
                                 <option value="">— Model Seçin —</option>
                             </select>
-                            <span asp-validation-for="ModelId" class="field-error">
+                            <span asp-validation-for="CarModelId" class="field-error">
                                 <i class="fa-solid fa-circle-exclamation"></i>
                             </span>
                         </div>
@@ -910,7 +898,7 @@
                                 </div>
                             </div>
                             <label class="custom-switch">
-                                <input asp-for="IsAvailable" type="checkbox" />
+                                    
                                 <span class="slider"></span>
                             </label>
                         </label>

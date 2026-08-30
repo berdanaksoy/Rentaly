@@ -20,11 +20,7 @@ namespace Rentaly.BusinessLayer.ValidationRules
                 .NotEmpty().WithMessage("Şasi numarası boş geçilemez")
                 .Length(17).WithMessage("Şasi numarası 17 karakter olmalıdır");
 
-            // Foreign Keys
-            RuleFor(x => x.BrandId)
-                .GreaterThan(0).WithMessage("Marka seçimi yapılmalıdır");
-
-            RuleFor(x => x.ModelId)
+            RuleFor(x => x.CarModelId)
                 .GreaterThan(0).WithMessage("Model seçimi yapılmalıdır");
 
             RuleFor(x => x.CategoryId)
@@ -69,7 +65,11 @@ namespace Rentaly.BusinessLayer.ValidationRules
 
             // Fuel Type
             RuleFor(x => x.FuelType)
-                .NotEmpty().WithMessage("Yakıt tipi boş geçilemez");
+                .IsInEnum().WithMessage("Geçerli bir yakıt tipi seçilmelidir");
+
+            // Transmission
+            RuleFor(x => x.Transmission)
+                .IsInEnum().WithMessage("Geçerli bir vites tipi seçilmelidir");
 
         }
     }
