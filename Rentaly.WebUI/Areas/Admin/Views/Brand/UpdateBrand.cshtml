@@ -1,0 +1,31 @@
+﻿@model UpdateBrandDto
+@{
+    ViewBag.PageTitle = "Marka Düzenle";
+}
+
+<div class="card p-4">
+    <h5 class="mb-4">Marka Düzenle</h5>
+
+    <form asp-action="UpdateBrand" method="post">
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+        <input type="hidden" asp-for="BrandId" />
+
+        <div class="mb-3">
+            <label asp-for="BrandName" class="form-label">Marka Adı</label>
+            <input asp-for="BrandName" class="form-control" />
+            <span asp-validation-for="BrandName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ImageUrl" class="form-label">Görsel URL</label>
+            <input asp-for="ImageUrl" class="form-control" />
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Vazgeç</a>
+        </div>
+    </form>
+</div>

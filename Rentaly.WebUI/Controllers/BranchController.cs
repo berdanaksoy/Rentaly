@@ -25,11 +25,5 @@ namespace Rentaly.WebUI.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateBranch(Branch branch)
-        {
-            await _branchService.TInsertAsync(branch);
-            return RedirectToAction("BranchList");
-        }
     }
 }

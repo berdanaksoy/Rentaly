@@ -11,7 +11,26 @@ namespace Rentaly.DataAccessLayer.Configurations
             builder.Property(x => x.DailyPrice).HasPrecision(18, 2);
             builder.Property(x => x.DepositAmount).HasPrecision(18, 2);
 
+            builder.Property(x => x.PlateNumber).IsRequired().HasMaxLength(10);
+            builder.Property(x => x.VIN).IsRequired().HasMaxLength(17);
+            builder.Property(x => x.ImageUrl).IsRequired().HasMaxLength(300);
+
             builder.HasIndex(x => x.PlateNumber).IsUnique();
+
+            builder.HasOne(x => x.CarModel)
+                .WithMany(x => x.Cars)
+                .HasForeignKey(x => x.CarModelId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(x => x.Category)
+                .WithMany(x => x.Cars)
+                .HasForeignKey(x => x.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(x => x.Branch)
+                .WithMany(x => x.Cars)
+                .HasForeignKey(x => x.BranchId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

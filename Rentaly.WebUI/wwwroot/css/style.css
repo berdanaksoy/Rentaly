@@ -5,32 +5,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 :root {
-  --primary: #1a56db;
-  --primary-dark: #1344b0;
-  --primary-light: #e8efff;
-  --accent: #f97316;
-  --accent-light: #fff4ed;
-  --sidebar-bg: #0f172a;
-  --sidebar-hover: #1e293b;
-  --sidebar-active: #1a56db;
-  --sidebar-text: #94a3b8;
-  --sidebar-text-active: #ffffff;
-  --sidebar-width: 270px;
-  --navbar-height: 66px;
-  --card-bg: #ffffff;
-  --body-bg: #f1f5f9;
-  --border: #e2e8f0;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --success: #10b981;
-  --danger: #ef4444;
-  --warning: #f59e0b;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.06);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.05);
-  --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
-  --radius: 12px;
-  --radius-sm: 8px;
-  --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    --primary: #179510;
+    --primary-dark: #17a411;
+    --primary-light: #e9f9e8;
+    --accent: #f59e0b;
+    --accent-light: #fef7e7;
+    --sidebar-bg: #10141c;
+    --sidebar-hover: #1a2029;
+    --sidebar-active: #179510;
+    --sidebar-text: #94a3b8;
+    --sidebar-text-active: #ffffff;
+    --sidebar-width: 270px;
+    --navbar-height: 66px;
+    --card-bg: #161a22;
+    --body-bg: #0d0f14;
+    --border: #252b36;
+    --text-main: #e6e8ec;
+    --text-muted: #8b93a3;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+    --radius: 8px;
+    --radius-sm: 8px;
+    --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -207,8 +207,8 @@ body {
   margin-left: auto;
 }
 
-.has-submenu.open .submenu-arrow {
-  transform: rotate(90deg);
+.has-submenu:has(.submenu.open) .submenu-arrow {
+    transform: rotate(90deg);
 }
 
 .submenu {
@@ -291,19 +291,19 @@ body {
    NAVBAR
    ============================================= */
 .navbar-top {
-  position: fixed;
-  top: 0;
-  left: var(--sidebar-width);
-  right: 0;
-  height: var(--navbar-height);
-  background: #fff;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  padding: 0 24px;
-  z-index: 1040;
-  transition: left 0.22s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: var(--shadow-sm);
+    position: fixed;
+    top: 0;
+    left: var(--sidebar-width);
+    right: 0;
+    height: var(--navbar-height);
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    z-index: 1040;
+    transition: left 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-sm);
 }
 
 .sidebar.collapsed ~ .main-wrapper .navbar-top {
@@ -538,14 +538,14 @@ body {
    FOOTER
    ============================================= */
 .site-footer {
-  background: #fff;
-  border-top: 1px solid var(--border);
-  padding: 16px 28px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px;
+    background: var(--card-bg);
+    border-top: 1px solid var(--border);
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .footer-text {
@@ -1080,3 +1080,49 @@ body {
 
 /* Toast */
 .toast-container { z-index: 9999; }
+
+.btn-primary {
+    --bs-btn-bg: var(--primary);
+    --bs-btn-border-color: var(--primary);
+    --bs-btn-hover-bg: var(--primary-dark);
+    --bs-btn-hover-border-color: var(--primary-dark);
+    --bs-btn-active-bg: var(--primary-dark);
+    --bs-btn-active-border-color: var(--primary-dark);
+    --bs-btn-disabled-bg: var(--primary);
+    --bs-btn-disabled-border-color: var(--primary);
+}
+
+.btn-outline-primary {
+    --bs-btn-color: var(--primary);
+    --bs-btn-border-color: var(--primary);
+    --bs-btn-hover-bg: var(--primary);
+    --bs-btn-hover-border-color: var(--primary);
+    --bs-btn-active-bg: var(--primary);
+    --bs-btn-active-border-color: var(--primary);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 .2rem rgba(30, 203, 21, .15);
+}
+
+a {
+    color: var(--primary);
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.user-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    flex-shrink: 0;
+}

@@ -4,7 +4,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRentalyServices(builder.Configuration);
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+
+    options.ModelBindingMessageProvider
+        .SetValueMustNotBeNullAccessor(_ => "Bu alan boş bırakılamaz.");
+    options.ModelBindingMessageProvider
+        .SetAttemptedValueIsInvalidAccessor((value, field) => $"'{value}' geçerli bir değer değil.");
+    options.ModelBindingMessageProvider
+        .SetValueIsInvalidAccessor(value => $"'{value}' geçersiz.");
+    options.ModelBindingMessageProvider
+        .SetMissingBindRequiredValueAccessor(field => $"{field} alanı gönderilmedi.");
+});
 
 var app = builder.Build();
 

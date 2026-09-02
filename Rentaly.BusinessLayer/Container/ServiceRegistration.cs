@@ -8,6 +8,7 @@ using Rentaly.DataAccessLayer.Abstract;
 using Rentaly.DataAccessLayer.Concrete;
 using Rentaly.DataAccessLayer.EntityFramework;
 using Rentaly.DataAccessLayer.UnitOfWorkDesignPattern;
+using FluentValidation;
 
 namespace Rentaly.BusinessLayer.Container
 {
@@ -44,6 +45,8 @@ namespace Rentaly.BusinessLayer.Container
             services.AddScoped<IRentalService, RentalManager>();
 
             services.AddAutoMapper(typeof(GeneralMapping).Assembly);
+
+            services.AddValidatorsFromAssembly(typeof(GeneralMapping).Assembly);
 
             return services;
         }

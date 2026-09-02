@@ -456,3 +456,60 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('confirmDeleteModal');
+    if (!modal) return;
+
+    modal.addEventListener('show.bs.modal', function (event) {
+        const trigger = event.relatedTarget;
+        const url = trigger.getAttribute('data-delete-url');
+        const name = trigger.getAttribute('data-item-name');
+
+        document.getElementById('confirmDeleteForm').setAttribute('action', url);
+        document.getElementById('deleteItemName').textContent = name;
+    });
+});
+
+function showToast(message, type) {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+
+    const styles = {
+        success: 'text-bg-success',
+        error: 'text-bg-danger',
+        warning: 'text-bg-warning',
+        info: 'text-bg-info'
+    };
+
+    const toast = document.createElement('div');
+    toast.className = 'toast align-items-center border-0 ' + (styles[type] || styles.info);
+    toast.setAttribute('role', 'alert');
+
+    const row = document.createElement('div');
+    row.className = 'd-flex';
+
+    const body = document.createElement('div');
+    body.className = 'toast-body';
+    body.textContent = message;
+
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'btn-close btn-close-white me-2 m-auto';
+    close.setAttribute('data-bs-dismiss', 'toast');
+
+    row.appendChild(body);
+    row.appendChild(close);
+    toast.appendChild(row);
+    container.appendChild(toast);
+
+    new bootstrap.Toast(toast, { delay: 4000 }).show();
+    toast.addEventListener('hidden.bs.toast', () => toast.remove());
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const server = document.getElementById('serverToast');
+    if (server) {
+        showToast(server.getAttribute('data-message'), server.getAttribute('data-type'));
+    }
+});
