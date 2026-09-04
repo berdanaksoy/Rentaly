@@ -2,7 +2,8 @@
 
 namespace Rentaly.DataAccessLayer.Abstract
 {
-    public interface ICarModelDal:IGenericDal<CarModel>
+    public interface ICarModelDal : IGenericDal<CarModel>
     {
+        Task<List<CarModel>> GetListWithBrandAsync();
     }
 }

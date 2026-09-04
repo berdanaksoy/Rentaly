@@ -10,6 +10,8 @@
     <form asp-action="UpdateBranch" method="post">
         <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
+        <input type="hidden" asp-for="BranchId" />
+
         <div class="mb-3">
             <label asp-for="BranchName" class="form-label">Şube Adı</label>
             <input asp-for="BranchName" class="form-control" />

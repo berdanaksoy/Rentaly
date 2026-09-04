@@ -8,7 +8,7 @@ namespace Rentaly.BusinessLayer.ValidationRules.CategoryValidations
     {
         public UpdateCategoryValidator()
         {
-            RuleFor(c => c.CategoryId).NotEmpty().WithMessage("Geçerli bir kategori seçilmelidir.");
+            RuleFor(c => c.CategoryId).GreaterThan(0).WithMessage("Geçerli bir kategori seçilmelidir.");
             RuleFor(c => c.CategoryName).NotEmpty().WithMessage(ErrorMessages.CategoryNameRequired);
             RuleFor(c => c.CategoryName).MinimumLength(2).WithMessage(ErrorMessages.CategoryNameLength).MaximumLength(50).WithMessage(ErrorMessages.CategoryNameLength);
         }

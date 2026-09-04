@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Rentaly.DtoLayer.BranchDtos;
 using Rentaly.DtoLayer.BrandDtos;
+using Rentaly.DtoLayer.CarModelDtos;
 using Rentaly.DtoLayer.CategoryDtos;
 using Rentaly.DtoLayer.CustomerDtos;
 using Rentaly.EntityLayer.Entities;
@@ -11,25 +12,36 @@ namespace Rentaly.BusinessLayer.Mapping
     {
         public GeneralMapping()
         {
-            CreateMap<Customer, CreateCustomerDto>().ReverseMap();
-            CreateMap<Customer, ResultCustomerDto>().ReverseMap();
-            CreateMap<Customer, GetCustomerByIdDto>().ReverseMap();
-            CreateMap<Customer, UpdateCustomerDto>().ReverseMap();
+            CreateMap<Customer, ResultCustomerDto>();
+            CreateMap<Customer, GetCustomerByIdDto>();
+            CreateMap<CreateCustomerDto, Customer>();
+            CreateMap<UpdateCustomerDto, Customer>()
+                .ForMember(dest => dest.CustomerId, opt => opt.Ignore());
 
-            CreateMap<Brand, ResultBrandDto>().ReverseMap();
-            CreateMap<Brand, CreateBrandDto>().ReverseMap();
-            CreateMap<Brand, UpdateBrandDto>().ReverseMap();
-            CreateMap<Brand, GetBrandByIdDto>().ReverseMap();
+            CreateMap<Brand, ResultBrandDto>();
+            CreateMap<Brand, GetBrandByIdDto>();
+            CreateMap<CreateBrandDto, Brand>();
+            CreateMap<UpdateBrandDto, Brand>()
+                .ForMember(dest => dest.BrandId, opt => opt.Ignore());
 
-            CreateMap<Branch, CreateBranchDto>().ReverseMap();
-            CreateMap<Branch, ResultBranchDto>().ReverseMap();
-            CreateMap<Branch, UpdateBranchDto>().ReverseMap();
-            CreateMap<Branch, GetBranchByIdDto>().ReverseMap();
+            CreateMap<Branch, ResultBranchDto>();
+            CreateMap<Branch, GetBranchByIdDto>();
+            CreateMap<CreateBranchDto, Branch>();
+            CreateMap<UpdateBranchDto, Branch>()
+                .ForMember(dest => dest.BranchId, opt => opt.Ignore());
 
-            CreateMap<Category, CreateCategoryDto>().ReverseMap();
-            CreateMap<Category, ResultCategoryDto>().ReverseMap();
-            CreateMap<Category, UpdateCategoryDto>().ReverseMap();
-            CreateMap<Category, GetCategoryByIdDto>().ReverseMap();
+            CreateMap<Category, ResultCategoryDto>();
+            CreateMap<Category, GetCategoryByIdDto>();
+            CreateMap<CreateCategoryDto, Category>();
+            CreateMap<UpdateCategoryDto, Category>()
+                .ForMember(dest => dest.CategoryId, opt => opt.Ignore());
+
+            CreateMap<CarModel, GetCarModelByIdDto>();
+            CreateMap<CreateCarModelDto, CarModel>();
+            CreateMap<UpdateCarModelDto, CarModel>()
+                .ForMember(dest => dest.CarModelId, opt => opt.Ignore());
+            CreateMap<CarModel, ResultCarModelDto>()
+                .ForMember(dest => dest.BrandName, opt => opt.MapFrom(src => src.Brand.BrandName));
         }
     }
 }

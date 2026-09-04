@@ -17,5 +17,8 @@
         public const string BranchCityLength = "Şehir adı 2-100 karakter arasında olmalıdır.";
         public const string CategoryNameRequired = "Kategori adı boş geçilemez.";
         public const string CategoryNameLength = "Kategori adı 2-50 karakter arasında olmalıdır.";
+        public const string CarModelNameRequired = "Model adı boş geçilemez.";
+        public const string CarModelNameLength = "Model adı 2-60 karakter arasında olmalıdır.";
+        public const string CarModelBrandRequired = "Marka seçilmelidir.";
     }
 }

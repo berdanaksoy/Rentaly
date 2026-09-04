@@ -9,7 +9,7 @@ namespace Rentaly.BusinessLayer.ValidationRules.BranchValidations
         public UpdateBranchValidator()
         {
             RuleFor(x => x.BranchId)
-                .NotEmpty().WithMessage("Şube ID boş geçilemez.");
+                .GreaterThan(0).WithMessage("Şube ID boş geçilemez.");
 
             RuleFor(x => x.BranchName)
                 .NotEmpty().WithMessage(ErrorMessages.BranchNameRequired)
