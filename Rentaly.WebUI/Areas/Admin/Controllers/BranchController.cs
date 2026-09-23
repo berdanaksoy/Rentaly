@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Rentaly.BusinessLayer.Abstract;
 using Rentaly.BusinessLayer.Exceptions;
 using Rentaly.DtoLayer.BranchDtos;
@@ -9,10 +10,12 @@ namespace Rentaly.WebUI.Areas.Admin.Controllers
     public class BranchController : Controller
     {
         private readonly IBranchService _branchService;
+        private readonly IMapper _mapper;
 
-        public BranchController(IBranchService branchService)
+        public BranchController(IBranchService branchService, IMapper mapper)
         {
             _branchService = branchService;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
@@ -58,13 +61,7 @@ namespace Rentaly.WebUI.Areas.Admin.Controllers
             if (value is null)
                 return NotFound();
 
-            var dto = new UpdateBranchDto
-            {
-                BranchId = value.BranchId,
-                BranchName = value.BranchName,
-                City = value.City,
-                Address = value.Address
-            };
+            var dto = _mapper.Map<UpdateBranchDto>(value);
 
             return View(dto);
         }

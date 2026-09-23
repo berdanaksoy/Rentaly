@@ -1,9 +1,11 @@
-﻿namespace Rentaly.EntityLayer.Enums
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Rentaly.EntityLayer.Enums
 {
     public enum TransmissionType
     {
-        Manual = 1,
-        Automatic = 2,
-        SemiAutomatic = 3
+        [Display(Name = "Manuel")] Manual = 1,
+        [Display(Name = "Otomatik")] Automatic = 2,
+        [Display(Name = "Yarı Otomatik")] SemiAutomatic = 3
     }
 }

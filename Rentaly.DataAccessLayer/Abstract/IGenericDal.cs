@@ -10,5 +10,6 @@ namespace Rentaly.DataAccessLayer.Abstract
         Task<List<T>> GetListAsync();
         Task<List<T>> GetListByFilterAsync(Expression<Func<T, bool>> filter);
         Task<T?> GetByIdAsync(int id);
+        Task<bool> AnyAsync(Expression<Func<T, bool>> filter);
     }
 }

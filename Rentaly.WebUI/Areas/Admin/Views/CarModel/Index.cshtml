@@ -23,6 +23,7 @@
                     <tr>
                         <th>Model Adı</th>
                         <th>Marka</th>
+                        <th>Kategori</th>
                         <th class="text-end">İşlemler</th>
                     </tr>
                 </thead>
@@ -32,6 +33,7 @@
                         <tr>
                             <td>@item.ModelName</td>
                             <td><span class="badge text-bg-secondary">@item.BrandName</span></td>
+                            <td>@item.CategoryName</td>
                             <td class="text-end">
                                 <a asp-action="UpdateCarModel" asp-route-id="@item.CarModelId"
                                    class="btn btn-sm btn-outline-primary">Düzenle</a>

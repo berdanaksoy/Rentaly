@@ -1,52 +1,90 @@
-﻿using Rentaly.BusinessLayer.Abstract;
+﻿using AutoMapper;
+using FluentValidation;
+using Rentaly.BusinessLayer.Abstract;
+using Rentaly.BusinessLayer.Exceptions;
 using Rentaly.DataAccessLayer.Abstract;
 using Rentaly.DataAccessLayer.UnitOfWorkDesignPattern;
+using Rentaly.DtoLayer.CarDtos;
 using Rentaly.EntityLayer.Entities;
 
 namespace Rentaly.BusinessLayer.Concrete
 {
-    public class CarManager : ICarService
+    public class CarManager : BaseManager, ICarService
     {
         private readonly ICarDal _carDal;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+        private readonly IValidator<CreateCarDto> _createValidator;
+        private readonly IValidator<UpdateCarDto> _updateValidator;
 
-        public CarManager(ICarDal carDal, IUnitOfWork unitOfWork)
+        public CarManager(ICarDal carDal, IUnitOfWork unitOfWork, IMapper mapper, IValidator<CreateCarDto> createValidator, IValidator<UpdateCarDto> updateValidator) : base (unitOfWork)
         {
             _carDal = carDal;
-            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+            _createValidator = createValidator;
+            _updateValidator = updateValidator;
         }
 
         public async Task TDeleteAsync(int id)
         {
+            var value =await _carDal.GetByIdAsync(id);
+
+            if (value is null)
+                throw new BusinessRuleException("Silinecek araç bulunamadı.");
+
             await _carDal.DeleteAsync(id);
-            await _unitOfWork.SaveChangesAsync();
+            await SaveAsync("Bu araca ait kiralama kayıtları olduğu için silinemedi.");
         }
 
-        public async Task<List<Car>> TGetAllCarsWithCategoryAsync()
+        public async Task<GetCarByIdDto?> TGetByIdAsync(int id)
         {
-            return await _carDal.GetAllCarsWithCategoryAsync();
+            var value = await _carDal.GetByIdAsync(id);
+
+            if (value is null)
+                throw new BusinessRuleException("Araç bulunamadı.");
+
+            return _mapper.Map<GetCarByIdDto>(value);
         }
 
-        public async Task<Car?> TGetByIdAsync(int id)
+        public async Task<List<ResultCarDto>> TGetListAsync()
         {
-            return await _carDal.GetByIdAsync(id);
+            var values = await _carDal.GetListWithRelationsAsync();
+            return _mapper.Map<List<ResultCarDto>>(values);
         }
 
-        public async Task<List<Car>> TGetListAsync()
+        public async Task TInsertAsync(CreateCarDto dto)
         {
-            return await _carDal.GetListAsync();
+            dto.PlateNumber = NormalizePlate(dto.PlateNumber);
+            dto.VIN = dto.VIN?.Trim().ToUpperInvariant() ?? string.Empty;
+
+            await _createValidator.ValidateOrThrowAsync(dto);
+
+            var value = _mapper.Map<Car>(dto);
+            await _carDal.InsertAsync(value);
+            await SaveAsync();
         }
 
-        public async Task TInsertAsync(Car entity)
+        public async Task TUpdateAsync(UpdateCarDto dto)
         {
-            await _carDal.InsertAsync(entity);
-            await _unitOfWork.SaveChangesAsync();
+            dto.PlateNumber = NormalizePlate(dto.PlateNumber);
+            dto.VIN = dto.VIN?.Trim().ToUpperInvariant() ?? string.Empty;
+
+            await _updateValidator.ValidateOrThrowAsync(dto);
+
+            var value = await _carDal.GetByIdAsync(dto.CarId);
+
+            if (value is null)
+                throw new BusinessRuleException("Güncellenecek araç bulunamadı.");
+
+            _mapper.Map(dto, value);
+            await SaveAsync();
         }
 
-        public async Task TUpdateAsync(Car entity)
+        private static string NormalizePlate(string? plate)
         {
-            await _carDal.UpdateAsync(entity);
-            await _unitOfWork.SaveChangesAsync();
+            if (string.IsNullOrWhiteSpace(plate))
+                return string.Empty;
+
+            return new string(plate.Where(char.IsLetterOrDigit).ToArray()).ToUpperInvariant();
         }
     }
 }

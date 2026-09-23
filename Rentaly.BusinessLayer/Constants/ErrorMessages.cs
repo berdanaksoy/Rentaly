@@ -20,5 +20,25 @@
         public const string CarModelNameRequired = "Model adı boş geçilemez.";
         public const string CarModelNameLength = "Model adı 2-60 karakter arasında olmalıdır.";
         public const string CarModelBrandRequired = "Marka seçilmelidir.";
+        public const string CarPlateRequired = "Plaka boş geçilemez.";
+        public const string CarVinRequired = "Şasi numarası boş geçilemez.";
+        public const string CarVinLength = "Şasi numarası 17 karakter olmalıdır.";
+        public const string CarModelRequired = "Model seçilmelidir.";
+        public const string CarBranchRequired = "Şube seçilmelidir.";
+        public const string CarYearInvalid = "Araç yılı geçerli bir değer olmalıdır.";
+        public const string CarKilometerInvalid = "Kilometre negatif olamaz.";
+        public const string CarDailyPriceInvalid = "Günlük fiyat 0'dan büyük olmalıdır.";
+        public const string CarDepositInvalid = "Depozito negatif olamaz.";
+        public const string CarImageRequired = "Araç görseli boş geçilemez.";
+        public const string CarImageLength = "Görsel adresi en fazla 300 karakter olabilir.";
+        public const string CarSeatCountInvalid = "Koltuk sayısı 1 ile 12 arasında olmalıdır.";
+        public const string CarLuggageInvalid = "Bagaj sayısı negatif olamaz.";
+        public const string CarFuelTypeInvalid = "Geçerli bir yakıt tipi seçilmelidir.";
+        public const string CarTransmissionInvalid = "Geçerli bir vites tipi seçilmelidir.";
+        public const string CarIdRequired = "Geçerli bir araç seçilmelidir.";
+        public const string CarPlateFormat = "Plaka formatı geçersiz. Örnek: 34ABC12, 34AB123, 06A1234";
+        public const string CarPlateAlreadyExists = "Bu plaka ile kayıtlı bir araç zaten var.";
+        public const string CarVinFormat = "Şasi numarası geçersiz karakter içeriyor.";
+        public const string CarVinAlreadyExists = "Bu şasi numarası ile kayıtlı bir araç zaten var.";
     }
 }

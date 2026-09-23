@@ -1,6 +1,7 @@
 ﻿@{
     Layout = null;
     var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
     var toastMessage = TempData["Success"] ?? TempData["Error"];
     var toastType = TempData["Success"] != null ? "success" : "error";
 }
@@ -51,11 +52,13 @@
                     <i class="fa-solid fa-chevron-right submenu-arrow ms-auto"></i>
                 </div>
                 <div class="submenu open" id="vehicleSubmenu">
-                    <a href="#" class="nav-link">
-                        <span class="nav-icon"><i class="fa-solid fa-list"></i></span>
+                    <a asp-area="Admin" asp-controller="Car" asp-action="Index"
+                       class="nav-link @(currentController == "Car" && currentAction != "CreateCar" ? "active" : "")">
+                        <span class="nav-icon"><i class="fa-solid fa-car"></i></span>
                         <span class="link-text">Araç Listesi</span>
                     </a>
-                    <a href="#" class="nav-link">
+                    <a asp-area="Admin" asp-controller="Car" asp-action="CreateCar"
+                       class="nav-link @(currentController == "Car" && currentAction == "CreateCar" ? "active" : "")">
                         <span class="nav-icon"><i class="fa-solid fa-plus"></i></span>
                         <span class="link-text">Yeni Araç Ekle</span>
                     </a>

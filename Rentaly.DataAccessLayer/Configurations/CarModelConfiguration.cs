@@ -14,6 +14,11 @@ namespace Rentaly.DataAccessLayer.Configurations
                 .WithMany(x => x.CarModels)
                 .HasForeignKey(x => x.BrandId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(x => x.Category)
+                .WithMany(x => x.CarModels)
+                .HasForeignKey(x => x.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

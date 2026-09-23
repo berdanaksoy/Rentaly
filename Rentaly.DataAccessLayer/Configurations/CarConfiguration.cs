@@ -17,14 +17,11 @@ namespace Rentaly.DataAccessLayer.Configurations
 
             builder.HasIndex(x => x.PlateNumber).IsUnique();
 
+            builder.HasIndex(x => x.VIN).IsUnique();
+
             builder.HasOne(x => x.CarModel)
                 .WithMany(x => x.Cars)
                 .HasForeignKey(x => x.CarModelId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasOne(x => x.Category)
-                .WithMany(x => x.Cars)
-                .HasForeignKey(x => x.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.Branch)

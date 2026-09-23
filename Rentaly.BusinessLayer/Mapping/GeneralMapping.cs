@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Rentaly.DtoLayer.BranchDtos;
 using Rentaly.DtoLayer.BrandDtos;
+using Rentaly.DtoLayer.CarDtos;
 using Rentaly.DtoLayer.CarModelDtos;
 using Rentaly.DtoLayer.CategoryDtos;
 using Rentaly.DtoLayer.CustomerDtos;
@@ -16,32 +17,48 @@ namespace Rentaly.BusinessLayer.Mapping
             CreateMap<Customer, GetCustomerByIdDto>();
             CreateMap<CreateCustomerDto, Customer>();
             CreateMap<UpdateCustomerDto, Customer>()
-                .ForMember(dest => dest.CustomerId, opt => opt.Ignore());
+                .ForMember(d => d.CustomerId, o => o.Ignore());
 
             CreateMap<Brand, ResultBrandDto>();
             CreateMap<Brand, GetBrandByIdDto>();
             CreateMap<CreateBrandDto, Brand>();
+            CreateMap<GetBrandByIdDto, UpdateBrandDto>();
             CreateMap<UpdateBrandDto, Brand>()
-                .ForMember(dest => dest.BrandId, opt => opt.Ignore());
+                .ForMember(d => d.BrandId, o => o.Ignore());
 
             CreateMap<Branch, ResultBranchDto>();
             CreateMap<Branch, GetBranchByIdDto>();
             CreateMap<CreateBranchDto, Branch>();
+            CreateMap<GetBranchByIdDto, UpdateBranchDto>();
             CreateMap<UpdateBranchDto, Branch>()
-                .ForMember(dest => dest.BranchId, opt => opt.Ignore());
+                .ForMember(d => d.BranchId, o => o.Ignore());
 
             CreateMap<Category, ResultCategoryDto>();
             CreateMap<Category, GetCategoryByIdDto>();
             CreateMap<CreateCategoryDto, Category>();
+            CreateMap<GetCategoryByIdDto, UpdateCategoryDto>();
             CreateMap<UpdateCategoryDto, Category>()
-                .ForMember(dest => dest.CategoryId, opt => opt.Ignore());
+                .ForMember(d => d.CategoryId, o => o.Ignore());
 
             CreateMap<CarModel, GetCarModelByIdDto>();
             CreateMap<CreateCarModelDto, CarModel>();
+            CreateMap<GetCarModelByIdDto, UpdateCarModelDto>();
             CreateMap<UpdateCarModelDto, CarModel>()
-                .ForMember(dest => dest.CarModelId, opt => opt.Ignore());
+                .ForMember(d => d.CarModelId, o => o.Ignore());
             CreateMap<CarModel, ResultCarModelDto>()
-                .ForMember(dest => dest.BrandName, opt => opt.MapFrom(src => src.Brand.BrandName));
+                .ForMember(d => d.BrandName, o => o.MapFrom(s => s.Brand.BrandName))
+                .ForMember(d => d.CategoryName, o => o.MapFrom(s => s.Category.CategoryName));
+
+            CreateMap<Car, GetCarByIdDto>();
+            CreateMap<CreateCarDto, Car>();
+            CreateMap<GetCarByIdDto, UpdateCarDto>();
+            CreateMap<UpdateCarDto, Car>()
+                .ForMember(d => d.CarId, o => o.Ignore());
+            CreateMap<Car, ResultCarDto>()
+                .ForMember(d => d.BrandName, o => o.MapFrom(s => s.CarModel.Brand.BrandName))
+                .ForMember(d => d.ModelName, o => o.MapFrom(s => s.CarModel.ModelName))
+                .ForMember(d => d.CategoryName, o => o.MapFrom(s => s.CarModel.Category.CategoryName))
+                .ForMember(d => d.BranchName, o => o.MapFrom(s => s.Branch.BranchName));
         }
     }
 }

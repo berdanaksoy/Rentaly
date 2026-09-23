@@ -1,0 +1,114 @@
+﻿@model UpdateCarDto
+@{
+    ViewBag.PageTitle = "Araç Düzenle";
+}
+
+<div class="card p-4">
+    <h5 class="mb-4">Araç Düzenle</h5>
+
+    <form asp-action="UpdateCar" method="post">
+        <div asp-validation-summary="All" class="alert alert-danger"></div>
+
+        <input type="hidden" asp-for="CarId" />
+
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label asp-for="PlateNumber" class="form-label">Plaka</label>
+                <input asp-for="PlateNumber" class="form-control" />
+                <span asp-validation-for="PlateNumber" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-8">
+                <label asp-for="VIN" class="form-label">Şasi No (VIN)</label>
+                <input asp-for="VIN" class="form-control" />
+                <span asp-validation-for="VIN" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="CarModelId" class="form-label">Model</label>
+                <select asp-for="CarModelId" asp-items="ViewBag.CarModels" class="form-select">
+                    <option value="">Model seçiniz</option>
+                </select>
+                <span asp-validation-for="CarModelId" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="BranchId" class="form-label">Şube</label>
+                <select asp-for="BranchId" asp-items="ViewBag.Branches" class="form-select">
+                    <option value="">Şube seçiniz</option>
+                </select>
+                <span asp-validation-for="BranchId" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="FuelType" class="form-label">Yakıt Tipi</label>
+                <select asp-for="FuelType" asp-items="ViewBag.FuelTypes" class="form-select">
+                    <option value="">Yakıt tipi seçiniz</option>
+                </select>
+                <span asp-validation-for="FuelType" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="Transmission" class="form-label">Vites</label>
+                <select asp-for="Transmission" asp-items="ViewBag.Transmissions" class="form-select">
+                    <option value="">Vites tipi seçiniz</option>
+                </select>
+                <span asp-validation-for="Transmission" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="Year" class="form-label">Model Yılı</label>
+                <input asp-for="Year" type="number" class="form-control" />
+                <span asp-validation-for="Year" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="Kilometer" class="form-label">Kilometre</label>
+                <input asp-for="Kilometer" type="number" class="form-control" />
+                <span asp-validation-for="Kilometer" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="SeatCount" class="form-label">Koltuk Sayısı</label>
+                <input asp-for="SeatCount" type="number" class="form-control" />
+                <span asp-validation-for="SeatCount" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="LuggageCount" class="form-label">Bagaj Sayısı</label>
+                <input asp-for="LuggageCount" type="number" class="form-control" />
+                <span asp-validation-for="LuggageCount" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="DailyPrice" class="form-label">Günlük Fiyat (₺)</label>
+                <input asp-for="DailyPrice" type="number" step="0.01" class="form-control" />
+                <span asp-validation-for="DailyPrice" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="DepositAmount" class="form-label">Depozito (₺)</label>
+                <input asp-for="DepositAmount" type="number" step="0.01" class="form-control" />
+                <span asp-validation-for="DepositAmount" class="text-danger"></span>
+            </div>
+
+            <div class="col-12">
+                <label asp-for="ImageUrl" class="form-label">Görsel Adresi</label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+
+            <div class="col-12">
+                <div class="form-check">
+                    <input asp-for="IsActive" class="form-check-input" />
+                    <label asp-for="IsActive" class="form-check-label">Araç aktif (yayında)</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex gap-2 mt-4">
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Vazgeç</a>
+        </div>
+    </form>
+</div>

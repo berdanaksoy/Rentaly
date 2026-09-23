@@ -5,6 +5,6 @@
         public int CategoryId { get; set; }
         public string CategoryName { get; set; } = null!;
 
-        public ICollection<Car> Cars { get; set; } = new List<Car>();
+        public ICollection<CarModel> CarModels { get; set; } = new List<CarModel>();
     }
 }

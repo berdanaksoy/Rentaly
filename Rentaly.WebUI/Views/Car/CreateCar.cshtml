@@ -629,21 +629,6 @@
                         </div>
 
                         <!-- Kategori -->
-                        <div class="form-field">
-                            <label asp-for="CategoryId" class="form-label">
-                                <i class="fa-solid fa-tags" style="color:var(--primary);"></i>
-                                Kategori <span class="req">*</span>
-                            </label>
-                            <select asp-for="CategoryId"
-                                    asp-items="ViewBag.Categories"
-                                    class="form-control-custom"
-                                    onchange="updatePreview()">
-                                <option value="">— Kategori Seçin —</option>
-                            </select>
-                            <span asp-validation-for="CategoryId" class="field-error">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                            </span>
-                        </div>
 
                         <!-- Şube -->
                         <div class="form-field">

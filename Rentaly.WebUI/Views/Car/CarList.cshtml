@@ -677,9 +677,6 @@
             <div class="car-card-body">
                 <!-- Başlık + Plaka -->
                 <div class="car-card-title-row">
-                    <div class="car-card-title">
-                        @(car.Category?.CategoryName ?? "—") &nbsp;#@car.CarId
-                    </div>
                     <span class="car-card-plate">@car.PlateNumber</span>
                 </div>
 
@@ -749,18 +746,6 @@
                 }
             </div>
 
-            <div class="car-list-info">
-                <div class="car-list-title">
-                    @(car.Category?.CategoryName ?? "—") — @car.PlateNumber
-                </div>
-                <div class="car-list-sub" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:4px;">
-                    <span>@car.Year</span>
-                    <span>·</span>
-                    <span>@car.Kilometer.ToString("N0") km</span>
-                    <span>·</span>
-                    
-                </div>
-            </div>
 
             <div class="car-list-price">@car.DailyPrice.ToString("N0") ₺ / gün</div>
 

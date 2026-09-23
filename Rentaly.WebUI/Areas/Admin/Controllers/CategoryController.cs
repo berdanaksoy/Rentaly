@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Rentaly.BusinessLayer.Abstract;
 using Rentaly.BusinessLayer.Exceptions;
 using Rentaly.DtoLayer.CategoryDtos;
@@ -9,10 +10,12 @@ namespace Rentaly.WebUI.Areas.Admin.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
+        private readonly IMapper _mapper;
 
-        public CategoryController(ICategoryService categoryService)
+        public CategoryController(ICategoryService categoryService, IMapper mapper)
         {
             _categoryService = categoryService;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
@@ -74,11 +77,7 @@ namespace Rentaly.WebUI.Areas.Admin.Controllers
             if (value is null)
                 return NotFound();
 
-            var dto = new UpdateCategoryDto
-            {
-                CategoryId = value.CategoryId,
-                CategoryName = value.CategoryName
-            };
+            var dto = _mapper.Map<UpdateCategoryDto>(value);
 
             return View(dto);
         }

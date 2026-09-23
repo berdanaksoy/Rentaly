@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Rentaly.BusinessLayer.Abstract;
 using Rentaly.BusinessLayer.Exceptions;
 using Rentaly.DtoLayer.BrandDtos;
@@ -9,10 +10,12 @@ namespace Rentaly.WebUI.Areas.Admin.Controllers
     public class BrandController : Controller
     {
         private readonly IBrandService _brandService;
+        private readonly IMapper _mapper;
 
-        public BrandController(IBrandService brandService)
+        public BrandController(IBrandService brandService, IMapper mapper)
         {
             _brandService = brandService;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
@@ -58,12 +61,7 @@ namespace Rentaly.WebUI.Areas.Admin.Controllers
             if (value is null)
                 return NotFound();
 
-            var dto = new UpdateBrandDto
-            {
-                BrandId = value.BrandId,
-                BrandName = value.BrandName,
-                ImageUrl = value.ImageUrl
-            };
+            var dto = _mapper.Map<UpdateBrandDto>(value);
 
             return View(dto);
         }

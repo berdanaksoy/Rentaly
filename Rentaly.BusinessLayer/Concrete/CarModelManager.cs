@@ -40,14 +40,14 @@ namespace Rentaly.BusinessLayer.Concrete
             var value = await _carModelDal.GetByIdAsync(id);
 
             if (value is null)
-                throw new BusinessRuleException("Model bulunamadı.");
+                return null;
 
             return _mapper.Map<GetCarModelByIdDto>(value);
         }
 
         public async Task<List<ResultCarModelDto>> TGetListAsync()
         {
-            var values = await _carModelDal.GetListWithBrandAsync();
+            var values = await _carModelDal.GetListWithRelationsAsync();
             return _mapper.Map<List<ResultCarModelDto>>(values);
         }
 

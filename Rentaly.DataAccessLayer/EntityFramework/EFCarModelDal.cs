@@ -12,10 +12,11 @@ namespace Rentaly.DataAccessLayer.EntityFramework
         {
         }
 
-        public async Task<List<CarModel>> GetListWithBrandAsync()
+        public async Task<List<CarModel>> GetListWithRelationsAsync()
         {
             return await _context.CarModels
                 .Include(x => x.Brand)
+                .Include(x => x.Category)
                 .AsNoTracking()
                 .ToListAsync();
         }

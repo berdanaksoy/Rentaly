@@ -1,0 +1,74 @@
+﻿@model List<ResultCarDto>
+@{
+    ViewBag.PageTitle = "Araç Listesi";
+}
+
+<div class="card p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="mb-0">Araçlar</h5>
+        <a asp-action="CreateCar" class="btn btn-primary">
+            <i class="fa-solid fa-plus me-1"></i> Yeni Araç
+        </a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <p class="text-muted mb-0">Henüz araç eklenmemiş.</p>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Plaka</th>
+                        <th>Araç</th>
+                        <th>Kategori</th>
+                        <th>Şube</th>
+                        <th>Yıl</th>
+                        <th>Günlük</th>
+                        <th>Durum</th>
+                        <th class="text-end">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><img src="@item.ImageUrl" alt="@item.ModelName" style="height:36px;" /></td>
+                            <td class="fw-medium">@item.PlateNumber</td>
+                            <td>@item.BrandName @item.ModelName</td>
+                            <td><span class="badge text-bg-secondary">@item.CategoryName</span></td>
+                            <td>@item.BranchName</td>
+                            <td>@item.Year</td>
+                            <td>@item.DailyPrice.ToString("N2") ₺</td>
+                            <td>
+                                @if (item.IsActive)
+                                {
+                                    <span class="badge text-bg-success">Aktif</span>
+                                }
+                                else
+                                {
+                                    <span class="badge text-bg-secondary">Pasif</span>
+                                }
+                            </td>
+                            <td class="text-end">
+                                <a asp-action="UpdateCar" asp-route-id="@item.CarId"
+                                   class="btn btn-sm btn-outline-primary">Düzenle</a>
+
+                                <button type="button" class="btn btn-sm btn-outline-danger"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#confirmDeleteModal"
+                                        data-delete-url="@Url.Action("DeleteCar", "Car", new { area = "Admin", id = item.CarId })"
+                                        data-item-name="@item.PlateNumber">
+                                    Sil
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

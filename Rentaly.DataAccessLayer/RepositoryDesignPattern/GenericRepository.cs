@@ -49,5 +49,10 @@ namespace Rentaly.DataAccessLayer.RepositoryDesignPattern
         {
             return await _context.Set<T>().Where(filter).AsNoTracking().ToListAsync();
         }
+
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> filter)
+        {
+            return await _context.Set<T>().AnyAsync(filter);
+        }
     }
 }

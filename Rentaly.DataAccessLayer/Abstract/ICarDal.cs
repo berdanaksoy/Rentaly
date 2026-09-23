@@ -1,12 +1,11 @@
-﻿using Rentaly.EntityLayer.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Rentaly.DataAccessLayer.Filters;
+using Rentaly.EntityLayer.Entities;
 
 namespace Rentaly.DataAccessLayer.Abstract
 {
-    public interface ICarDal:IGenericDal<Car>
+    public interface ICarDal : IGenericDal<Car>
     {
-        Task<List<Car>> GetAllCarsWithCategoryAsync();
+        Task<List<Car>> GetListWithRelationsAsync();
+        Task<List<Car>> GetFilteredListAsync(CarFilter filter);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Rentaly.BusinessLayer.Abstract;
 using Rentaly.BusinessLayer.Exceptions;
@@ -11,11 +12,15 @@ namespace Rentaly.WebUI.Areas.Admin.Controllers
     {
         private readonly ICarModelService _carModelService;
         private readonly IBrandService _brandService;
+        private readonly ICategoryService _categoryService;
+        private readonly IMapper _mapper;
 
-        public CarModelController(ICarModelService carModelService, IBrandService brandService)
+        public CarModelController(ICarModelService carModelService, IBrandService brandService, ICategoryService categoryService, IMapper mapper)
         {
             _carModelService = carModelService;
             _brandService = brandService;
+            _categoryService = categoryService;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
@@ -27,7 +32,7 @@ namespace Rentaly.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> CreateCarModel()
         {
-            await LoadBrandsAsync();
+            await LoadSelectListsAsync();
             return View();
         }
 
@@ -50,7 +55,7 @@ namespace Rentaly.WebUI.Areas.Admin.Controllers
                 ModelState.AddModelError(string.Empty, ex.Message);
             }
 
-            await LoadBrandsAsync();
+            await LoadSelectListsAsync();
             return View(dto);
         }
 
@@ -62,14 +67,9 @@ namespace Rentaly.WebUI.Areas.Admin.Controllers
             if (value is null)
                 return NotFound();
 
-            var dto = new UpdateCarModelDto
-            {
-                CarModelId = value.CarModelId,
-                ModelName = value.ModelName,
-                BrandId = value.BrandId
-            };
+            var dto = _mapper.Map<UpdateCarModelDto>(value);
 
-            await LoadBrandsAsync();
+            await LoadSelectListsAsync();
             return View(dto);
         }
 
@@ -92,7 +92,7 @@ namespace Rentaly.WebUI.Areas.Admin.Controllers
                 ModelState.AddModelError(string.Empty, ex.Message);
             }
 
-            await LoadBrandsAsync();
+            await LoadSelectListsAsync();
             return View(dto);
         }
 
@@ -112,10 +112,13 @@ namespace Rentaly.WebUI.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        private async Task LoadBrandsAsync()
+        private async Task LoadSelectListsAsync()
         {
             var brands = await _brandService.TGetListAsync();
+            var categories = await _categoryService.TGetListAsync();
+
             ViewBag.Brands = new SelectList(brands, "BrandId", "BrandName");
+            ViewBag.Categories = new SelectList(categories, "CategoryId", "CategoryName");
         }
     }
 }

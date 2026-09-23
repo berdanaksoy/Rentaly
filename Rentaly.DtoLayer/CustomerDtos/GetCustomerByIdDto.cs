@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Rentaly.DtoLayer.CustomerDtos
+﻿namespace Rentaly.DtoLayer.CustomerDtos
 {
     public class GetCustomerByIdDto
     {

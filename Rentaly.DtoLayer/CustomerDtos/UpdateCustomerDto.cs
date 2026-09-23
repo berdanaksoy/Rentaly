@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Rentaly.DtoLayer.CustomerDtos
+﻿namespace Rentaly.DtoLayer.CustomerDtos
 {
     public class UpdateCustomerDto
     {
@@ -11,8 +7,5 @@ namespace Rentaly.DtoLayer.CustomerDtos
         public string Surname { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public string IdentityNumber { get; set; }
-        public string DrivingLicenseNumber { get; set; }
-        public DateTime DrivingLicenseDate { get; set; }
     }
 }
