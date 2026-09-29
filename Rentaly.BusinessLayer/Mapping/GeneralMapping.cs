@@ -18,6 +18,7 @@ namespace Rentaly.BusinessLayer.Mapping
             CreateMap<CreateCustomerDto, Customer>();
             CreateMap<UpdateCustomerDto, Customer>()
                 .ForMember(d => d.CustomerId, o => o.Ignore());
+            CreateMap<GetCustomerByIdDto, UpdateCustomerDto>();
 
             CreateMap<Brand, ResultBrandDto>();
             CreateMap<Brand, GetBrandByIdDto>();

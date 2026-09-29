@@ -31,7 +31,7 @@
         <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="sidebar-logo">
             <div class="logo-icon"><i class="fa-solid fa-car-side"></i></div>
             <div class="logo-text">
-                <strong>RentCar</strong>
+                <strong>Rentaly</strong>
                 <span>Admin Panel</span>
             </div>
         </a>
@@ -47,14 +47,14 @@
             <div class="menu-label">Araç Yönetimi</div>
             <div class="has-submenu" id="vehicleMenu">
                 <div class="nav-link" onclick="toggleSubmenu('vehicleSubmenu', 'vehicleMenu')">
-                    <span class="nav-icon"><i class="fa-solid fa-cars"></i></span>
+                    <span class="nav-icon"><i class="fa-solid fa-car"></i></span>
                     <span class="link-text">Araç Yönetimi</span>
                     <i class="fa-solid fa-chevron-right submenu-arrow ms-auto"></i>
                 </div>
                 <div class="submenu open" id="vehicleSubmenu">
                     <a asp-area="Admin" asp-controller="Car" asp-action="Index"
                        class="nav-link @(currentController == "Car" && currentAction != "CreateCar" ? "active" : "")">
-                        <span class="nav-icon"><i class="fa-solid fa-car"></i></span>
+                        <span class="nav-icon"><i class="fa-solid fa-list"></i></span>
                         <span class="link-text">Araç Listesi</span>
                     </a>
                     <a asp-area="Admin" asp-controller="Car" asp-action="CreateCar"
@@ -67,7 +67,8 @@
                         <span class="nav-icon"><i class="fa-solid fa-trademark"></i></span>
                         <span class="link-text">Marka Yönetimi</span>
                     </a>
-                    <a href="#" class="nav-link">
+                    <a asp-area="Admin" asp-controller="CarModel" asp-action="Index"
+                       class="nav-link @(currentController == "CarModel" ? "active" : "")">
                         <span class="nav-icon"><i class="fa-solid fa-cube"></i></span>
                         <span class="link-text">Model Yönetimi</span>
                     </a>
@@ -85,29 +86,20 @@
                 <span class="nav-icon"><i class="fa-solid fa-building"></i></span>
                 <span class="link-text">Şube Yönetimi</span>
             </a>
-            <a href="#" class="nav-link">
+            <a asp-area="Admin" asp-controller="Customer" asp-action="Index"
+               class="nav-link @(currentController == "Customer" ? "active" : "")">
                 <span class="nav-icon"><i class="fa-solid fa-users"></i></span>
                 <span class="link-text">Müşteri Yönetimi</span>
-                <span class="menu-badge">12</span>
             </a>
             <a href="#" class="nav-link">
                 <span class="nav-icon"><i class="fa-solid fa-calendar-check"></i></span>
                 <span class="link-text">Rezervasyon Yönetimi</span>
-                <span class="menu-badge">5</span>
-            </a>
-            <a href="#" class="nav-link">
-                <span class="nav-icon"><i class="fa-solid fa-credit-card"></i></span>
-                <span class="link-text">Ödeme Yönetimi</span>
             </a>
 
-            <div class="menu-label">Sistem</div>
+            <div class="menu-label">Site İçeriği</div>
             <a href="#" class="nav-link">
-                <span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span>
-                <span class="link-text">Raporlar</span>
-            </a>
-            <a href="#" class="nav-link">
-                <span class="nav-icon"><i class="fa-solid fa-gear"></i></span>
-                <span class="link-text">Ayarlar</span>
+                <span class="nav-icon"><i class="fa-solid fa-file-lines"></i></span>
+                <span class="link-text">Ana Sayfa Bölümleri</span>
             </a>
         </nav>
 
@@ -115,8 +107,8 @@
             <div class="sidebar-user">
                 <div class="user-avatar">A</div>
                 <div class="user-info">
-                    <div class="user-name">Admin User</div>
-                    <div class="user-role">Süper Yönetici</div>
+                    <div class="user-name">Admin</div>
+                    <div class="user-role">Yönetici</div>
                 </div>
             </div>
         </div>

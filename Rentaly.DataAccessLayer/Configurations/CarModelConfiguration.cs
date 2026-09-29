@@ -19,6 +19,8 @@ namespace Rentaly.DataAccessLayer.Configurations
                 .WithMany(x => x.CarModels)
                 .HasForeignKey(x => x.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Property(x => x.MinimumLicenseYears).HasDefaultValue(2);
         }
     }
 }

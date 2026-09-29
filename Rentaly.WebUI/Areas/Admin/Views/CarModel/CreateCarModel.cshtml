@@ -31,6 +31,12 @@
             <span asp-validation-for="ModelName" class="text-danger"></span>
         </div>
 
+        <div class="mb-3">
+            <label asp-for="MinimumLicenseYears" class="form-label">Minimum Ehliyet Yılı</label>
+            <input asp-for="MinimumLicenseYears" type="number" class="form-control" />
+            <span asp-validation-for="MinimumLicenseYears" class="text-danger"></span>
+        </div>
+
         <div class="d-flex gap-2">
             <button type="submit" class="btn btn-primary">Kaydet</button>
             <a asp-action="Index" class="btn btn-outline-secondary">Vazgeç</a>

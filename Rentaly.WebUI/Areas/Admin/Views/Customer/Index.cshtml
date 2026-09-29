@@ -1,19 +1,17 @@
-﻿@model List<ResultCarModelDto>
+﻿@model List<ResultCustomerDto>
 @{
-    ViewBag.PageTitle = "Model Yönetimi";
+    ViewBag.PageTitle = "Müşteri Yönetimi";
 }
 
 <div class="card p-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h5 class="mb-0">Modeller</h5>
-        <a asp-action="CreateCarModel" class="btn btn-primary">
-            <i class="fa-solid fa-plus me-1"></i> Yeni Model
-        </a>
+        <h5 class="mb-0">Müşteriler</h5>
+        <span class="text-muted small">@Model.Count kayıt</span>
     </div>
 
     @if (!Model.Any())
     {
-        <p class="text-muted mb-0">Henüz model eklenmemiş.</p>
+        <p class="text-muted mb-0">Henüz müşteri kaydı yok. Kayıtlar rezervasyon formundan oluşur.</p>
     }
     else
     {
@@ -21,10 +19,9 @@
             <table class="table align-middle">
                 <thead>
                     <tr>
-                        <th>Model Adı</th>
-                        <th>Marka</th>
-                        <th>Kategori</th>
-                        <th>Min. Ehliyet</th>
+                        <th>Ad Soyad</th>
+                        <th>E-posta</th>
+                        <th>Telefon</th>
                         <th class="text-end">İşlemler</th>
                     </tr>
                 </thead>
@@ -32,19 +29,18 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@item.ModelName</td>
-                            <td><span class="badge text-bg-secondary">@item.BrandName</span></td>
-                            <td>@item.CategoryName</td>
-                            <td>@item.MinimumLicenseYears yıl</td>
+                            <td class="fw-medium">@item.Name @item.Surname</td>
+                            <td>@item.Email</td>
+                            <td>@item.Phone</td>
                             <td class="text-end">
-                                <a asp-action="UpdateCarModel" asp-route-id="@item.CarModelId"
+                                <a asp-action="UpdateCustomer" asp-route-id="@item.CustomerId"
                                    class="btn btn-sm btn-outline-primary">Düzenle</a>
 
                                 <button type="button" class="btn btn-sm btn-outline-danger"
                                         data-bs-toggle="modal"
                                         data-bs-target="#confirmDeleteModal"
-                                        data-delete-url="@Url.Action("DeleteCarModel", "CarModel", new { area = "Admin", id = item.CarModelId })"
-                                        data-item-name="@item.BrandName @item.ModelName">
+                                        data-delete-url="@Url.Action("DeleteCustomer", "Customer", new { area = "Admin", id = item.CustomerId })"
+                                        data-item-name="@item.Name @item.Surname">
                                     Sil
                                 </button>
                             </td>

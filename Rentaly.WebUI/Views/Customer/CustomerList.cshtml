@@ -569,19 +569,6 @@
     </div>
     <div class="col-6 col-md-3">
         <div class="mini-stat">
-            <div class="mini-stat-icon" style="background:#d1fae5;color:#059669;">
-                <i class="fa-solid fa-id-card"></i>
-            </div>
-            <div>
-                <div class="mini-stat-val" style="color:#059669;">
-                    @Model.Count(c => !string.IsNullOrEmpty(c.DrivingLicenseNumber))
-                </div>
-                <div class="mini-stat-label">Ehliyeti Olan</div>
-            </div>
-        </div>
-    </div>
-    <div class="col-6 col-md-3">
-        <div class="mini-stat">
             <div class="mini-stat-icon" style="background:#fff7ed;color:#ea580c;">
                 <i class="fa-solid fa-envelope"></i>
             </div>
@@ -652,8 +639,7 @@
              data-name="@customer.Name?.ToLower()"
              data-surname="@customer.Surname?.ToLower()"
              data-email="@customer.Email?.ToLower()"
-             data-phone="@customer.Phone?.ToLower()"
-             data-license-date="@customer.DrivingLicenseDate.Ticks">
+             data-phone="@customer.Phone?.ToLower()">
 
             <div class="customer-card-accent"></div>
 
@@ -692,29 +678,6 @@
                     <div class="customer-info-icon id-num">
                         <i class="fa-solid fa-fingerprint"></i>
                     </div>
-                    <div class="customer-info-text">
-                        <span class="customer-info-label">TC Kimlik No</span>
-                        <span class="customer-info-value">@(string.IsNullOrEmpty(customer.IdentityNumber) ? "—" : customer.IdentityNumber)</span>
-                    </div>
-                </div>
-
-                <div class="customer-info-row">
-                    <div class="customer-info-icon license">
-                        <i class="fa-solid fa-id-card"></i>
-                    </div>
-                    <div class="customer-info-text">
-                        <span class="customer-info-label">Ehliyet No / Tarih</span>
-                        <span class="customer-info-value">
-                            @(string.IsNullOrEmpty(customer.DrivingLicenseNumber) ? "—" : customer.DrivingLicenseNumber)
-                            @if (customer.DrivingLicenseDate != default)
-                            {
-                                <span class="license-date-badge" style="margin-left:4px;">
-                                    <i class="fa-solid fa-calendar-check" style="font-size:10px;"></i>
-                                    @customer.DrivingLicenseDate.ToString("dd.MM.yyyy")
-                                </span>
-                            }
-                        </span>
-                    </div>
                 </div>
             </div>
 
@@ -747,8 +710,7 @@
              data-name="@customer.Name?.ToLower()"
              data-surname="@customer.Surname?.ToLower()"
              data-email="@customer.Email?.ToLower()"
-             data-phone="@customer.Phone?.ToLower()"
-             data-license-date="@customer.DrivingLicenseDate.Ticks">
+             data-phone="@customer.Phone?.ToLower()">
 
             <div class="customer-list-avatar">@initials</div>
 
@@ -766,15 +728,6 @@
                     <span class="customer-list-meta">
                         <i class="fa-solid fa-phone"></i>
                         @(string.IsNullOrEmpty(customer.Phone) ? "Telefon yok" : customer.Phone)
-                    </span>
-                    <span style="color:var(--border);">·</span>
-                    <span class="customer-list-meta">
-                        <i class="fa-solid fa-id-card"></i>
-                        @(string.IsNullOrEmpty(customer.DrivingLicenseNumber) ? "Ehliyet yok" : customer.DrivingLicenseNumber)
-                        @if (customer.DrivingLicenseDate != default)
-                        {
-                            <span style="margin-left:4px;color:#16a34a;">(@customer.DrivingLicenseDate.ToString("dd.MM.yyyy"))</span>
-                        }
                     </span>
                 </div>
             </div>

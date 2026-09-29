@@ -11,5 +11,6 @@
         public ICollection<Car> Cars { get; set; } = new List<Car>();
         public int CategoryId { get; set; }
         public Category Category { get; set; } = null!;
+        public int MinimumLicenseYears { get; set; }
     }
 }

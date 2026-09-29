@@ -1,9 +1,21 @@
 ﻿namespace Rentaly.BusinessLayer.Constants
 {
-    public class ErrorMessages
+    public static class ErrorMessages
     {
         public const string CustomerNameRequired = "Müşteri adı boş bırakılamaz.";
         public const string CustomerSurnameRequired = "Müşteri soyadı boş bırakılamaz.";
+        public const string CustomerNameLength = "Müşteri adı 2-50 karakter arasında olmalıdır.";
+        public const string CustomerSurnameLength = "Müşteri soyadı 2-50 karakter arasında olmalıdır.";
+        public const string CustomerEmailRequired = "E-posta boş bırakılamaz.";
+        public const string CustomerEmailLength = "E-posta en fazla 100 karakter olabilir.";
+        public const string CustomerPhoneRequired = "Telefon numarası boş bırakılamaz.";
+        public const string CustomerIdentityRequired = "Kimlik numarası boş bırakılamaz.";
+        public const string CustomerIdentityLength = "Kimlik numarası 11 haneli olmalıdır.";
+        public const string CustomerIdentityDigits = "Kimlik numarası sadece rakam içermelidir.";
+        public const string CustomerLicenseRequired = "Ehliyet numarası boş bırakılamaz.";
+        public const string CustomerLicenseLength = "Ehliyet numarası en fazla 20 karakter olabilir.";
+        public const string CustomerLicenseDateFuture = "Ehliyet tarihi gelecekte olamaz.";
+        public const string CustomerIdRequired = "Geçerli bir müşteri seçilmelidir.";
         public const string InvalidEmail = "Geçerli bir email adresi giriniz.";
         public const string InvalidPhone = "Telefon numarası geçersiz.";
         public const string IdentityNumberInvalid = "Kimlik numarası 11 haneli olmalıdır.";
@@ -40,5 +52,6 @@
         public const string CarPlateAlreadyExists = "Bu plaka ile kayıtlı bir araç zaten var.";
         public const string CarVinFormat = "Şasi numarası geçersiz karakter içeriyor.";
         public const string CarVinAlreadyExists = "Bu şasi numarası ile kayıtlı bir araç zaten var.";
+        public const string MinimumLicenseYearFormat = "Minimum ehliyet yılı 0 ile 10 arasında olmalıdır.";
     }
 }

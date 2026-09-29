@@ -18,6 +18,10 @@ namespace Rentaly.BusinessLayer.ValidationRules.CarModelValidations
 
             RuleFor(x => x.BrandId)
                 .GreaterThan(0).WithMessage(ErrorMessages.CarModelBrandRequired);
+
+            RuleFor(x => x.MinimumLicenseYears)
+                .InclusiveBetween(0, 10)
+                .WithMessage(ErrorMessages.MinimumLicenseYearFormat);
         }
     }
 }

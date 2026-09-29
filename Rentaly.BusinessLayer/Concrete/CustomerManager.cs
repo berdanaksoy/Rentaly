@@ -1,38 +1,28 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using Rentaly.BusinessLayer.Abstract;
+using Rentaly.BusinessLayer.Exceptions;
 using Rentaly.DataAccessLayer.Abstract;
 using Rentaly.DataAccessLayer.UnitOfWorkDesignPattern;
 using Rentaly.DtoLayer.CustomerDtos;
-using Rentaly.EntityLayer.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Rentaly.BusinessLayer.Concrete
 {
-    public class CustomerManager : ICustomerService
+    public class CustomerManager : BaseManager, ICustomerService
     {
         private readonly ICustomerDal _customerDal;
         private readonly IMapper _mapper;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IValidator<UpdateCustomerDto> _updateValidator;
 
-        public CustomerManager(ICustomerDal customerDal, IMapper mapper, IUnitOfWork unitOfWork)
+        public CustomerManager(
+            ICustomerDal customerDal,
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            IValidator<UpdateCustomerDto> updateValidator) : base(unitOfWork)
         {
             _customerDal = customerDal;
             _mapper = mapper;
-            _unitOfWork = unitOfWork;
-        }
-
-        public async Task TDeleteAsync(int id)
-        {
-            await _customerDal.DeleteAsync(id);
-            await _unitOfWork.SaveChangesAsync();
-        }
-
-        public async Task<GetCustomerByIdDto> TGetByIdAsync(int id)
-        {
-            var value = await _customerDal.GetByIdAsync(id);
-            return _mapper.Map<GetCustomerByIdDto>(value);
+            _updateValidator = updateValidator;
         }
 
         public async Task<List<ResultCustomerDto>> TGetListAsync()
@@ -41,18 +31,49 @@ namespace Rentaly.BusinessLayer.Concrete
             return _mapper.Map<List<ResultCustomerDto>>(values);
         }
 
-        public async Task TInsertAsync(CreateCustomerDto dto)
+        public async Task<GetCustomerByIdDto?> TGetByIdAsync(int id)
         {
-            var value = _mapper.Map<Customer>(dto);
-            await _customerDal.InsertAsync(value);
-            await _unitOfWork.SaveChangesAsync();
+            var value = await _customerDal.GetByIdAsync(id);
+
+            if (value is null)
+                return null;
+
+            return _mapper.Map<GetCustomerByIdDto>(value);
         }
 
-        public async Task TUpdateAsync(CreateCustomerDto dto)
+        public async Task TUpdateAsync(UpdateCustomerDto dto)
         {
-            var value = _mapper.Map<Customer>(dto);
-            await _customerDal.UpdateAsync(value);
-            await _unitOfWork.SaveChangesAsync();
+            dto.Phone = NormalizePhone(dto.Phone);
+            dto.Email = dto.Email?.Trim() ?? string.Empty;
+
+            await _updateValidator.ValidateOrThrowAsync(dto);
+
+            var value = await _customerDal.GetByIdAsync(dto.CustomerId);
+
+            if (value is null)
+                throw new BusinessRuleException("Güncellenecek müşteri bulunamadı.");
+
+            _mapper.Map(dto, value);
+            await SaveAsync();
+        }
+
+        public async Task TDeleteAsync(int id)
+        {
+            var value = await _customerDal.GetByIdAsync(id);
+
+            if (value is null)
+                throw new BusinessRuleException("Silinecek müşteri bulunamadı.");
+
+            await _customerDal.DeleteAsync(id);
+            await SaveAsync("Bu müşteriye ait rezervasyonlar olduğu için silinemedi.");
+        }
+
+        private static string NormalizePhone(string? phone)
+        {
+            if (string.IsNullOrWhiteSpace(phone))
+                return string.Empty;
+
+            return new string(phone.Where(char.IsDigit).ToArray());
         }
     }
 }
